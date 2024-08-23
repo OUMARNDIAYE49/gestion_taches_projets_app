@@ -1,19 +1,22 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import TaskList from '../views/TaskList.vue'
-import ProjectList from '../views/ProjectList.vue'
-import TaskDetail from '../views/TaskDetail.vue'
-import ProjectDetail from '../views/ProjectDetail.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
+import Taches from '../views/Taches.vue';
+import Projets from '../views/Projets.vue';
+import About from '@/views/About.vue';
+
+
+
 
 const routes = [
-  { path: '/tasks', name: 'TaskList', component: TaskList },
-  { path: '/projects', name: 'ProjectList', component: ProjectList },
-  { path: '/tasks/:id', name: 'TaskDetail', component: TaskDetail },
-  { path: '/projects/:id', name: 'ProjectDetail', component: ProjectDetail }
-]
+    { path: '/', name: 'Home', component: Home },
+    { path: '/taches', name: 'Taches', component: Taches },
+    { path: '/projets', name: 'Projets', component: Projets },
+    { path: '/About', component: About },
+];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes
-})
+    history: createWebHistory(),
+    routes,
+});
 
-export default router
+export default router;
