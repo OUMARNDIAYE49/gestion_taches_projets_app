@@ -12,7 +12,9 @@
           </div>
           <div class="mb-3">
             <label for="projet" class="form-label">Projet</label>
-            <input v-model="nouvelleTache.projet" type="text" class="form-control" id="projet" required />
+            <select v-model="nouvelleTache.projet" class="form-control" id="projet" required>
+              <option v-for="projet in projets" :key="projet.id" :value="projet.nom">{{ projet.nom }}</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
@@ -72,7 +74,9 @@
           </div>
           <div class="mb-3">
             <label for="projet" class="form-label">Projet</label>
-            <input v-model="tacheSelectionnee.projet" type="text" class="form-control" id="projet" required />
+            <select v-model="tacheSelectionnee.projet" class="form-control" id="projet" required>
+              <option v-for="projet in projets" :key="projet.id" :value="projet.nom">{{ projet.nom }}</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="description" class="form-label">Description</label>
@@ -103,9 +107,15 @@ const tachesStore = useTachesStore();
 const taches = tachesStore.taches;
 const tacheSelectionnee = ref(null);
 
+const projets = ref([
+  { id: 1, nom: 'Projet A' },
+  { id: 2, nom: 'Projet B' },
+  { id: 3, nom: 'Projet C' },
+]);
+
 const nouvelleTache = ref({
   nom: '',
-  projet: '',
+  projet: projets.value[0]?.nom || '',
   description: '',
   dateDebut: '',
   dateFin: '',
@@ -115,7 +125,7 @@ function ajouterNouvelleTache() {
   tachesStore.ajouterTache({ ...nouvelleTache.value, id: Date.now() });
   nouvelleTache.value = {
     nom: '',
-    projet: '',
+    projet: projets.value[0]?.nom || '',
     description: '',
     dateDebut: '',
     dateFin: '',
@@ -139,6 +149,7 @@ onMounted(() => {
   // Charger les tâches depuis une API ou initialiser les données si nécessaire
 });
 </script>
+
 
 <style scoped>
 .card {
